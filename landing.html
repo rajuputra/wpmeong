@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="id" class="dark"><head></head><body class="min-h-screen bg-[#09090b] text-[#fafafa] flex flex-col justify-between selection:bg-red-500 selection:text-white relative"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WPMeong - Tes Kecepatan Mengetikmu, Meow!</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              dark: '#09090b',
+              surface: '#121217',
+              border: '#27272a',
+            }
+          },
+          animation: {
+            'cat-float': 'catFloat 4s ease-in-out infinite',
+            'paw-wave': 'pawWave 2.5s ease-in-out infinite',
+            'blink': 'blink 4s infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            catFloat: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pawWave: {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '50%': { transform: 'rotate(12deg)' },
+            },
+            blink: {
+              '0%, 90%, 100%': { transform: 'scaleY(1)' },
+              '95%': { transform: 'scaleY(0.1)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #09090b;
+      color: #fafafa;
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    /* Ambient keyboard grid backdrop */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    /* Cat head interactive bouncy states */
+    .cat-mascot-card {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cat-mascot-card:hover {
+      transform: translateY(-8px) scale(1.06) rotate(-2deg);
+    }
+    .cat-mascot-card:active {
+      transform: scale(0.96) rotate(1deg);
+    }
+    .key-badge {
+      box-shadow: 0 4px 0 #18181b, 0 8px 16px rgba(0,0,0,0.4);
+    }
+  </style>
+
+
+
+  <!-- Top Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden select-none opacity-20"><svg class="w-full h-full object-cover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none"><defs><pattern id="keycap-wireframe" width="140" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(-14) skewX(-10)"><g stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.6"><rect x="10" y="10" width="120" height="100" rx="14" fill="none"></rect><rect x="22" y="20" width="96" height="76" rx="8" stroke-width="0.9" stroke-opacity="0.35" fill="none"></rect><line x1="10" y1="10" x2="22" y2="20" stroke-width="0.8" stroke-opacity="0.3"></line><line x1="130" y1="10" x2="118" y2="20" stroke-width="0.8" stroke-opacity="0.3"></line><line x1="10" y1="110" x2="22" y2="96" stroke-width="0.8" stroke-opacity="0.3"></line><line x1="130" y1="110" x2="118" y2="96" stroke-width="0.8" stroke-opacity="0.3"></line></g></pattern><radialGradient id="center-fade" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#09090b" stop-opacity="0.85"></stop><stop offset="50%" stop-color="#09090b" stop-opacity="0.4"></stop><stop offset="100%" stop-color="#09090b" stop-opacity="0.05"></stop></radialGradient></defs><rect width="100%" height="100%" fill="url(#keycap-wireframe)"></rect><rect width="100%" height="100%" fill="url(#center-fade)"></rect></svg></div><div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-red-500/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 right-1/4 w-[500px] h-[300px] bg-amber-600/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+
+  <!-- Header / Minimal Navigation -->
+  <header class="w-full max-w-6xl mx-auto px-6 py-6 flex items-center justify-between z-10">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-sm shadow-inner"><svg class="w-5 h-5 drop-shadow-sm" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 10L3.5 4.5C3.2 3.7 4 3 4.8 3.3L9 5.2" fill="#FAFAFA" stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M18.5 10L20.5 4.5C20.8 3.7 20 3 19.2 3.3L15 5.2" fill="#FAFAFA" stroke="#18181B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.5 4.2L6 7" stroke="#F87171" stroke-width="1.2" stroke-linecap="round"></path><path d="M19.5 4.2L18 7" stroke="#F87171" stroke-width="1.2" stroke-linecap="round"></path><path d="M4.5 11C4.5 7.5 7.5 6 12 6C16.5 6 19.5 7.5 19.5 11C19.5 16 16.5 19.5 12 19.5C7.5 19.5 4.5 16 4.5 11Z" fill="#FAFAFA" stroke="#18181B" stroke-width="1.2" stroke-linejoin="round"></path><rect x="10.2" y="6.5" width="3.6" height="2.2" rx="0.6" fill="#09090B" stroke="#EF4444" stroke-width="0.5"></rect><circle cx="8.5" cy="11.5" r="1.2" fill="#18181B"></circle><circle cx="15.5" cy="11.5" r="1.2" fill="#18181B"></circle><circle cx="7" cy="13.2" r="1" fill="#FCA5A5" fill-opacity="0.7"></circle><circle cx="17" cy="13.2" r="1" fill="#FCA5A5" fill-opacity="0.7"></circle><path d="M11.5 13L12.5 13L12 13.6Z" fill="#EF4444"></path><path d="M11 14.5C11.3 15 11.7 15 12 14.6C12.3 15 12.7 15 13 14.5" stroke="#18181B" stroke-width="0.8" stroke-linecap="round" fill="none"></path></svg></div>
+      <span class="text-xs font-mono tracking-widest text-zinc-400 uppercase font-semibold">WPMeong // v2.4</span>
+    </div>
+
+    <!-- Quick stats teaser & audio switch -->
+    <div class="flex items-center gap-4 text-xs font-mono text-zinc-400">
+      <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800/80 backdrop-blur-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-zinc-300">1,429 Meongers online</span>
+      </div>
+      <button class="p-2 rounded-lg bg-zinc-900/80 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 transition" title="Sound Effects">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Centered Content -->
+  <main class="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12 z-10 w-full max-w-4xl mx-auto text-center">
+
+    <!-- 1. Mascot (Hero Graphic): Large, simple, cute & minimalist SVG cat head illustration -->
+    <div class="relative group cursor-pointer mb-6 sm:mb-8">
+      <!-- Glow behind cat -->
+      <div class="absolute -inset-4 bg-gradient-to-tr from-red-500/20 via-orange-500/15 to-transparent rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition duration-500 -z-10"></div>
+      
+      <!-- Interactive Bouncing SVG Mascot -->
+      <div class="cat-mascot-card relative p-2">
+        <svg class="w-40 h-40 sm:w-52 sm:h-52 drop-shadow-[0_12px_28px_rgba(0,0,0,0.7)] animate-cat-float" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background Subtle Shadow Disc -->
+          <ellipse cx="110" cy="190" rx="65" ry="8" fill="#000000" fill-opacity="0.45"></ellipse>
+
+          <!-- Left Ear -->
+          <path d="M42 90 L24 26 C22 20 28 15 34 18 L76 46 Z" fill="#FAFAFA" stroke="#18181B" stroke-width="6" stroke-linejoin="round"></path>
+          <path d="M44 80 L32 35 C31 32 34 30 37 32 L68 53 Z" fill="#F87171" fill-opacity="0.85"></path>
+
+          <!-- Right Ear -->
+          <path d="M178 90 L196 26 C198 20 192 15 186 18 L144 46 Z" fill="#FAFAFA" stroke="#18181B" stroke-width="6" stroke-linejoin="round"></path>
+          <path d="M176 80 L188 35 C189 32 186 30 183 32 L152 53 Z" fill="#F87171" fill-opacity="0.85"></path>
+
+          <!-- Main Head Silhouette (Chubby Cute Kitty Shape) -->
+          <path d="M34 104 C34 60 70 42 110 42 C150 42 186 60 186 104 C186 150 152 176 110 176 C68 176 34 150 34 104 Z" fill="#FAFAFA" stroke="#18181B" stroke-width="6" stroke-linejoin="round"></path>
+
+          <!-- Cute Cheeks Blushing -->
+          <circle cx="58" cy="120" r="11" fill="#FCA5A5" fill-opacity="0.55"></circle>
+          <circle cx="162" cy="120" r="11" fill="#FCA5A5" fill-opacity="0.55"></circle>
+
+          <!-- Left Eye (Big expressive anime/minimalist kitty eye) -->
+          <g class="animate-blink origin-center">
+            <circle cx="78" cy="98" r="9.5" fill="#18181B"></circle>
+            <circle cx="75" cy="94.5" r="3.5" fill="#FFFFFF"></circle>
+            <circle cx="81.5" cy="100.5" r="1.5" fill="#FFFFFF"></circle>
+          </g>
+
+          <!-- Right Eye -->
+          <g class="animate-blink origin-center">
+            <circle cx="142" cy="98" r="9.5" fill="#18181B"></circle>
+            <circle cx="139" cy="94.5" r="3.5" fill="#FFFFFF"></circle>
+            <circle cx="145.5" cy="100.5" r="1.5" fill="#FFFFFF"></circle>
+          </g>
+
+          <!-- Cute Little Triangle Nose -->
+          <path d="M106 108 L114 108 C115 108 115.5 109 115 110 L110.8 114.5 C110.4 115 109.6 115 109.2 114.5 L105 110 C104.5 109 105 108 106 108 Z" fill="#EF4444"></path>
+
+          <!-- Playful Meow Mouth (':3' smile) -->
+          <path d="M100 118 C103 123 108 123 110 117 C112 123 117 123 120 118" stroke="#18181B" stroke-width="3.5" stroke-linecap="round" fill="none"></path>
+
+          <!-- Whiskers Left -->
+          <path d="M22 112 L50 115" stroke="#18181B" stroke-width="3" stroke-linecap="round"></path>
+          <path d="M20 126 L48 123" stroke="#18181B" stroke-width="3" stroke-linecap="round"></path>
+
+          <!-- Whiskers Right -->
+          <path d="M198 112 L170 115" stroke="#18181B" stroke-width="3" stroke-linecap="round"></path>
+          <path d="M200 126 L172 123" stroke="#18181B" stroke-width="3" stroke-linecap="round"></path>
+
+          <!-- Keyboard Keycap Crown / forehead playful stamp -->
+          <rect x="96" y="54" width="28" height="18" rx="4" fill="#09090B" stroke="#27272A" stroke-width="2"></rect>
+          <text x="110" y="66" fill="#EF4444" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="bold" text-anchor="middle" dominant-baseline="middle">ESC</text>
+        </svg>
+
+        <!-- Playful Click Me Tooltip on Mascot -->
+        <div class="absolute -top-3 -right-2 sm:-right-4 bg-zinc-900 border border-zinc-700/80 shadow-lg px-2.5 py-1 rounded-full text-[11px] font-mono font-medium text-zinc-300 pointer-events-none group-hover:scale-110 group-hover:border-red-500/50 group-hover:text-red-400 transition-all duration-300 flex items-center gap-1"><svg class="w-3 h-3 text-red-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z"></path></svg><span class="">meow!</span></div>
+      </div>
+    </div>
+
+    <!-- 2. Typography / Wordmark -->
+    <div class="space-y-3 mb-8 sm:mb-10">
+      <!-- Title: WPMeong (WPM in bold white, eong in text-red-500) -->
+      <h1 class="text-5xl sm:text-7xl md:text-8xl tracking-tight font-black leading-none select-none">
+        <span class="text-white hover:text-zinc-200 transition-colors">WPM</span><span class="text-red-500 inline-block hover:scale-105 transition-transform duration-300">eong</span>
+      </h1>
+      
+      <!-- Subtitle: Tes kecepatan mengetikmu, meow! in muted gray text-gray-400 -->
+      <p class="text-gray-400 text-lg sm:text-xl md:text-2xl font-normal max-w-xl mx-auto tracking-normal">
+        Tes kecepatan mengetikmu, <span class="text-zinc-200 font-medium italic">meow!</span>
+      </p>
+
+      <!-- Micro Keyboard Mode Toggles (Focused Minimalist Feature) -->
+      <div class="pt-2 flex items-center justify-center gap-2 text-xs font-mono">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-zinc-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Mode: 15s • 30s • 60s
+        </span>
+        <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-zinc-500 hidden sm:inline-flex">
+          <kbd class="px-1 py-0.5 text-[10px] bg-zinc-800 rounded text-zinc-300 border border-zinc-700">tab</kbd> + <kbd class="px-1 py-0.5 text-[10px] bg-zinc-800 rounded text-zinc-300 border border-zinc-700">enter</kbd> restart
+        </span>
+      </div>
+    </div>
+
+    <!-- 3. Action Buttons (Call to Actions): Centered responsive layout -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full max-w-md mx-auto"><button onclick="window.alert('Memulai Tes Mengetik WPMeong! Bersiaplah pada tombol keyboardmu...')" class="group relative w-full sm:flex-1 h-14 inline-flex items-center justify-center gap-2.5 px-6 bg-white text-zinc-950 font-bold text-base rounded-2xl shadow-xl shadow-white/5 hover:bg-zinc-100 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/10 active:translate-y-0 transition-all duration-200 cursor-pointer"><svg class="w-5 h-5 text-zinc-900 group-hover:scale-110 transition-transform duration-200 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3" ry="3"></rect><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M6 12h.001M10 12h.001M14 12h.001M18 12h.001M8 16h8"></path></svg><span class="tracking-tight font-semibold">Mulai Tes</span><span class="hidden sm:inline-flex items-center text-[10px] font-mono font-medium px-1.5 py-0.5 bg-zinc-900 text-zinc-300 rounded ml-1">↵</span></button><button class="w-full sm:flex-1 h-14 inline-flex items-center justify-center gap-2.5 px-6 bg-zinc-900 hover:bg-zinc-800/90 text-white font-semibold text-base rounded-2xl border border-gray-700 hover:border-gray-600 hover:-translate-y-1 hover:shadow-lg active:translate-y-0 transition-all duration-200 cursor-pointer"><svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"></path><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"></path><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 10.04 0 12s.45 3.82 1.25 5.42l4.03-3.15z"></path><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"></path></svg><span class="tracking-tight whitespace-nowrap">Login Google</span></button></div>
+
+    <!-- Subtle Feature Ribbon / Live Teaser -->
+    <div class="mt-12 sm:mt-16 pt-8 border-t border-zinc-800/60 w-full max-w-xl grid grid-cols-3 gap-4 text-center">
+      <div class="p-2 rounded-xl hover:bg-zinc-900/40 transition">
+        <div class="text-zinc-500 text-xs font-mono uppercase mb-1">Akurasi</div>
+        <div class="text-white font-bold font-mono text-sm sm:text-base flex items-center justify-center gap-1">
+          <span class="text-emerald-400">99.2%</span>
+        </div>
+      </div>
+      <div class="p-2 rounded-xl hover:bg-zinc-900/40 transition border-x border-zinc-800/50">
+        <div class="text-zinc-500 text-xs font-mono uppercase mb-1">Global Record</div>
+        <div class="text-white font-bold font-mono text-sm sm:text-base flex items-center justify-center gap-1">
+          <span class="text-red-400">184</span> <span class="text-xs text-zinc-500 font-normal">WPM</span>
+        </div>
+      </div>
+      <div class="p-2 rounded-xl hover:bg-zinc-900/40 transition">
+        <div class="text-zinc-500 text-xs font-mono uppercase mb-1">Mechanical Feel</div>
+        <div class="text-white font-bold font-mono text-sm sm:text-base flex items-center justify-center gap-1">
+          <span class="">Cherry MX</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Clean Minimalist Footer -->
+  <footer class="w-full max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 gap-3 z-10 border-t border-zinc-900/80">
+    <div class="flex items-center gap-2">
+      <span class="text-zinc-400 font-medium">WPMeong</span>
+      <span class="">•</span>
+      <span class="">Built for speed, focus &amp; paw precision.</span>
+    </div>
+    <div class="flex items-center gap-5 text-zinc-500 font-mono">
+      <a href="#" class="hover:text-zinc-300 transition">leaderboard</a>
+      <a href="#" class="hover:text-zinc-300 transition">custom test</a>
+      <a href="#" class="hover:text-zinc-300 transition">keyboard sound</a>
+      <span class="text-zinc-700">|</span>
+      <span class="">tekan <kbd class="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-400 border border-zinc-700">space</kbd> untuk mulai</span>
+    </div>
+  </footer>
+
+  <script>
+    // Quick interactive key listener to mimic fast typing test readiness
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const primaryBtn = document.querySelector('button');
+        if (primaryBtn) {
+          primaryBtn.classList.add('scale-95');
+          setTimeout(() => primaryBtn.classList.remove('scale-95'), 150);
+        }
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+
+</body></html>
